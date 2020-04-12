@@ -19,7 +19,7 @@ public enum ErrorCode {
     REPEAT_ERROR(20005, "重复操作"),
 
     BIND_ERROR(90001, "端口绑定错误"),
-    SERVER_ERROR(90002, "服务器错误"),
+    SERVER_ERROR(90002, "服务器内部错误"),
     PARAM_EMPTY(90003, "参数为空"),
     PARAM_ERROR(90004, "参数错误"),
     NOT_EXIST(90004, "数据不存在");
