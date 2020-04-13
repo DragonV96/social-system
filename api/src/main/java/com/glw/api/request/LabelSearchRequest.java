@@ -10,14 +10,11 @@ import java.io.Serializable;
  * @author : glw
  * @date : 2020/4/12
  * @time : 12:36
- * @Description : 标签请求对象
+ * @Description : 标签搜索请求对象
  */
 @Data
-@ApiModel(value = "标签请求对象")
-public class LabelRequest implements Serializable {
-
-    @ApiModelProperty(value = "标签ID")
-    private Integer id;
+@ApiModel(value = "标签搜索请求对象")
+public class LabelSearchRequest implements Serializable {
 
     @ApiModelProperty(value = "标签名称")
     private String labelname;
@@ -25,12 +22,6 @@ public class LabelRequest implements Serializable {
     @ApiModelProperty(value = "状态")
     private String state;
 
-    @ApiModelProperty(value = "使用数量")
-    private Long count;
-
     @ApiModelProperty(value = "是否推荐")
     private String recommend;
-
-    @ApiModelProperty(value = "粉丝数")
-    private Long fans;
 }

@@ -3,6 +3,7 @@ package com.glw.api.service.impl;
 import com.glw.api.dao.LabelDao;
 import com.glw.api.entity.TLabel;
 import com.glw.api.request.LabelRequest;
+import com.glw.api.request.LabelSearchRequest;
 import com.glw.api.service.LabelService;
 import com.glw.common.enums.ErrorCode;
 import com.glw.common.exception.GlobalException;
@@ -10,9 +11,15 @@ import com.glw.common.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,5 +79,31 @@ public class LabelServiceImpl implements LabelService {
     @Override
     public void delete(Integer id) {
         labelDao.deleteById(id);
+    }
+
+    @Override
+    public List<TLabel> findSearch(LabelSearchRequest request) {
+        return labelDao.findAll(new Specification<TLabel>() {
+            @Override
+            public Predicate toPredicate(Root<TLabel> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+                List<Predicate> list = new ArrayList<>();
+                if (StringUtils.isNotEmpty(request.getLabelname())) {
+                    Predicate predicate = builder.like(root.get("labelname").as(String.class), "%" + request.getLabelname() + "%");
+                    list.add(predicate);
+                }
+                if (StringUtils.isNotEmpty(request.getState())) {
+                    Predicate predicate = builder.equal(root.get("state").as(String.class), request.getState());
+                    list.add(predicate);
+                }
+                if (StringUtils.isNotEmpty(request.getRecommend())) {
+                    Predicate predicate = builder.like(root.get("recommend").as(String.class), request.getRecommend());
+                    list.add(predicate);
+                }
+
+                Predicate[] predicates = new Predicate[list.size()];
+                predicates = list.toArray(predicates);
+                return builder.and(predicates);
+            }
+        });
     }
 }

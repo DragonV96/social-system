@@ -29,6 +29,9 @@
         <java.version>1.8</java.version>
         <lombok.version>1.16.18</lombok.version>
         <mysql.version>5.1.47</mysql.version>
+        <swagger.version>2.9.2</swagger.version>
+        <swagger-models.version>1.5.21</swagger-models.version>
+        <swagger-ui.version>1.8.8</swagger-ui.version>
     </properties>
 
     <dependencies>
@@ -48,6 +51,35 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
+        </dependency>
+
+        <!-- 构建Restful API -->
+        <!-- doc.html -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>swagger-models</artifactId>
+                    <groupId>io.swagger</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>swagger-models</artifactId>
+            <groupId>io.swagger</groupId>
+            <version>${swagger-models.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>${swagger-ui.version}</version>
         </dependency>
     </dependencies>
 

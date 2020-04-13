@@ -2,6 +2,7 @@ package com.glw.api.service;
 
 import com.glw.api.entity.TLabel;
 import com.glw.api.request.LabelRequest;
+import com.glw.api.request.LabelSearchRequest;
 
 import java.util.List;
 
@@ -42,4 +43,11 @@ public interface LabelService {
      * @return
      */
     void delete(Integer id);
+
+    /**
+     * 搜索标签
+     * @param request
+     * @return
+     */
+    List<TLabel> findSearch(LabelSearchRequest request);
 }

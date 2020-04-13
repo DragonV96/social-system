@@ -1,6 +1,8 @@
 package com.glw.common.vo;
 
 import com.glw.common.enums.ErrorCode;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -10,18 +12,19 @@ import lombok.Data;
  * @Description : 通用响应对象
  */
 @Data
+@ApiModel(value = "通用响应对象")
 public class ApiResponse<T> {
 
-    /** 数据状态码 */
+    @ApiModelProperty(value = "数据状态码")
     private int code;
 
-    /** 状态码对应描述 */
+    @ApiModelProperty(value = "状态码对应描述")
     private String message;
 
-    /** 标志 */
+    @ApiModelProperty(value = "标志")
     private Boolean flag;
 
-    /** 数据 */
+    @ApiModelProperty(value = "数据")
     private T data;
 
     public ApiResponse() {
